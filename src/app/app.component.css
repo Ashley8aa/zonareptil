@@ -1,0 +1,11 @@
+mat-toolbar {
+    justify-content: space-between;
+  }
+
+
+  /*
+  THIS MODIFIES THE PADDING FOR ALL COMPONENTS
+  .content {
+    padding:32px;
+  }
+  */

@@ -1,0 +1,194 @@
+
+<section style="position: relative;">
+  <div class='air air1'></div>
+  <div class='air air2'></div>
+  <div class='air air3'></div>
+  <div class='air air4'></div>
+
+
+
+
+    <div class="container py-5 h-50">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-lg-8 col-xl-5">
+          <div class="card rounded-3">
+
+
+
+            <div class="card-body p-4 p-md-5">
+              <!--START OF TEMP & HUMEDAD MAX/MIN FORM-->
+
+              <div class="iconThermo">
+
+
+
+                <div *ngFor="let item2 of terrario2" class="iconThermo">
+                  <mat-icon class="thermo"> thermostat</mat-icon>
+                  &nbsp;
+                  <span> Temperatura: {{item2}}º</span>
+                </div>
+
+
+              </div>
+
+              <br>
+
+              <!--START OF TEMP MAX/MIN FORM-->
+
+              <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Temperatura Inicial</th>
+                    <th scope="col">Temperatura Final</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of data$ | async">
+                    <td>
+                      <div class="d-flex justify-content-center align-items-center" style="height: 50px;">
+                        <h3>{{ item.rangoInicialTemp }}°C</h3>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex justify-content-center align-items-center" style="height: 50px;">
+                        <h3>{{ item.rangoFinalTemp }}°C</h3>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+
+
+
+              <!--END OF TEMP MAX/MIN FORM-->
+
+
+
+              <br>
+              <br>
+
+
+
+              <!--START OF HUMEDAD-->
+
+
+              <div *ngFor="let item of terrario" class="iconCloud">
+                <mat-icon class="cloud"> cloud</mat-icon>
+                &nbsp;
+                <span> Humedad: {{item}}%</span>
+              </div>
+
+              <br>
+
+              <!--START OF HUMEDAD MAX/MIN FORM-->
+
+
+              <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Humedad Inicial</th>
+                    <th scope="col">Humedad Final</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let itemsRef of data$ | async">
+                    <td>
+                      <div class="d-flex justify-content-center align-items-center" style="height: 50px;">
+                        <h3>{{ itemsRef.rangoInicialHum }}%</h3>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex justify-content-center align-items-center" style="height: 50px;">
+                        <h3>{{ itemsRef.rangoFinalHum }}%</h3>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <br>
+
+
+              <div class="text-center">
+                <button type="button" class="btn btn-success" (click)="openEditModal()">Editar Rangos</button>
+              </div>
+
+
+
+            </div>
+            <br>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  
+</section>
+
+
+  <!--START OF EDITAR RANGOS FORM-->
+
+
+  <ng-template #editModal let-modal>
+    <div class="modal-header">
+
+      <h4 class="modal-title" id="editProfileLabel">Editar Rangos</h4>
+      
+      <button type="button" class="btn-close"  (click)="modal.dismiss()" aria-label="Close">
+      </button>
+    </div>
+
+
+
+
+    <!-- RANGO HUMEDAD -->
+    <div class="modal-body">
+      <form [formGroup]="editForm">
+        <div class="form-control-sm ">
+          <div class="col-sm-8">
+          </div>
+          <label>Temperatura Inicial</label>
+
+          <input formControlName="rangoInicialTemp" type="number">
+
+        </div>
+
+        <div class="form-control-sm ">
+          <div class="col-sm-8">
+          </div>
+          <label>Temperatura Final</label>
+
+          <input formControlName="rangoFinalTemp" type="number">
+
+        </div>
+
+
+
+
+        <!-- RANGO HUMEDAD -->
+        <div class="form-control-sm ">
+          <label>Humedad Inicial</label>
+
+          <input formControlName="rangoInicialHum" type="number">
+
+        </div>
+
+        <div class="form-control-sm ">
+          <div class="col-sm-8">
+          </div>
+          <label>Humedad Final</label>
+          <input formControlName="rangoFinalHum" type="number">
+        </div>
+
+
+        <div class="modal-footer justify-content-center">
+          <button type="submit" class="btn btn-success" (click)="updateObject(); modal.close()">Save changes</button>
+        </div>
+      </form>
+
+    </div>
+
+  </ng-template>
+
